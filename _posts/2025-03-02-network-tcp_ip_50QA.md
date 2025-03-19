@@ -360,3 +360,26 @@ last_modified_at: 2025-03-19
 		- 같은 packet에 대한 ACK 응답이 3번 중복되면, 손실로 판단 & 즉시 재전송
 	- **Fast Recover (빠른 복구)**
 		- Congestion이 감지되었을 때, 한 번에 window 크기를 줄이지 않고 점진적으로 감소
+
+### 18. Stop-and-Wait vs Sliding Window protocol 비교
+- Stop-and-Wait 와 Sliding Window 의 공통점
+	- 기본적으로 *Flow Control* 와 *Error Control*을 위한 protocol
+	- 여러 Network Layer에서 응용될 수 있음 (특히, *Transport Layer*, *Network Layer*)
+- Stop-and-Wait
+	- 한 번에 하나의 TCP segment/Frame를 전송. 수신 측의 ACK를 기다림
+	(Transport Layer에선 TCP segment, Network Layer에선 Frame)
+		- 송신 window size: 1
+		- 수신 window size: 1
+	- 한 번에 한 방향으로만 전송 가능 (Half-Duplex)
+	- 낮은 효율
+		- 비효율적이라 현재 TCP 에선 거의 사용되지 않음
+- Sliding Window
+	- 한 번에 여러 개의 TCP segment/Frame 전송. 손상되거나 유실된 것만 재전송. 최대 N개
+	- ACK가 수신만큼 window-sliding 발생 -> 추가적인 TCP segment/Frame 전송 가능
+		- 송신 window size: N (한 번에 최대 N개 전송 가능)
+		- 수신 window size: 1~N
+	- Frame Sorting 과정이 필요할 수도
+	- 양방향 데이터 전송 가능 (Full-Duplex)
+		- 데이터 전송 & ACK 수신 동시에 가능
+	- 높은 효율
+		- 현대 TCP에서도 핵심적으로 사용되는 Protocol
