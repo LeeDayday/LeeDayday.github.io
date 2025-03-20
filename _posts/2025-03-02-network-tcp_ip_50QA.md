@@ -383,3 +383,31 @@ last_modified_at: 2025-03-19
 		- 데이터 전송 & ACK 수신 동시에 가능
 	- 높은 효율
 		- 현대 TCP에서도 핵심적으로 사용되는 Protocol
+
+### RTT (Round Trip Time) 란?
+- 왕복 지연 시간, 네트워크 상태를 측정하는 중요한 지표
+- Packet이 목적지로 전송된 후, 해당 packet에 대한 응답 (ACK) 가 다시 돌아오는데 걸리는 총 시간 (ms)
+- 영향을 미치는 주요 요인
+	- 거리 (Distance)
+		- 요청이 서버에 도달하고, 응답이 돌아오는 데 걸리는 거리
+		- 거리가 길수록 RTT 증가
+	- 전송 매체 (Transmission Medium)
+		- 신호를 전달하는 네트워크 매체 (광섬유, 구리선, 무선)
+		- 빠른 전송 매체를 사용할수록 RTT 감소
+	- 네트워크 홉 (Network Hops)
+		- 신호가 여러 장치 (router, switch) 를 거쳐 전달
+		- Hop이 많을수록 RTT 증가
+	- 트래픽 수준 (Traffic Levels)
+		- 네트워크 트래픽이 많으면 packet 대기량 높음 > RTT 증가
+	- 서버 응답 시간 (Server Response Time)
+		- 서버 요청 처리 시간
+- RTT 는 대략적인 값이며, 네트워크 경로와 혼잡도에 따라 값이 변동될 수 있음
+- RTT 감소 방법
+	- CDN (Condent Delivery Network) 사용
+		- 여러 서버로 구성된 네트워크, 특정 웹사이트의 콘텐츠를 각 서버에 복사하여 저장
+		- RTT를 줄이는 방식
+			- PoP
+			- Web Caching
+			- Load Distribution
+			- Scalability
+			- Tier 1 Network Access
