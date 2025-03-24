@@ -384,7 +384,7 @@ last_modified_at: 2025-03-19
 	- 높은 효율
 		- 현대 TCP에서도 핵심적으로 사용되는 Protocol
 
-### RTT (Round Trip Time) 란?
+### 19. RTT (Round Trip Time) 란?
 - 왕복 지연 시간, 네트워크 상태를 측정하는 중요한 지표
 - Packet이 목적지로 전송된 후, 해당 packet에 대한 응답 (ACK) 가 다시 돌아오는데 걸리는 총 시간 (ms)
 - 영향을 미치는 주요 요인
@@ -411,3 +411,7 @@ last_modified_at: 2025-03-19
 			- Load Distribution
 			- Scalability
 			- Tier 1 Network Access
+
+### 20. TCP의 ACK 가 중요한 이유
+- host의 성공적인 packet 수신을 확인 (acknowledge)하기 위해
+- ACK flag가 설정되어 있을 경우, 해당 TCP header의 'Acknowledgment number' field에 유효한 번호가 포함되어 있다는 의미
