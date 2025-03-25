@@ -415,3 +415,10 @@ last_modified_at: 2025-03-19
 ### 20. TCP의 ACK 가 중요한 이유
 - host의 성공적인 packet 수신을 확인 (acknowledge)하기 위해
 - ACK flag가 설정되어 있을 경우, 해당 TCP header의 'Acknowledgment number' field에 유효한 번호가 포함되어 있다는 의미
+
+### 21. 재전송 (Retransmission) 이란?
+- TCP 에서 Retransmission이란, 손실되었거나 손상된 packet을 network를 통해 다시 보내는 것
+- Retransmission: TCP 같은 protocol이 신뢰성 있는 통신을 제공하기 위해 사용하는 메커니즘
+	- *신뢰성 있는 통신* : data packet이 정확하게 전달됨을 보장
+- **TCP: ACK + Retransmission**
+	- **-> 신뢰성 보장**
