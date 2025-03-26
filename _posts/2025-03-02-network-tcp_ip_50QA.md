@@ -422,3 +422,17 @@ last_modified_at: 2025-03-19
 	- *신뢰성 있는 통신* : data packet이 정확하게 전달됨을 보장
 - **TCP: ACK + Retransmission**
 	- **-> 신뢰성 보장**
+
+
+### 22. RTT 예측 계산 연습 문제
+- 현재 RTT가 30 ms 이고, 이후에 수신된 ACK가 각각 26ms, 32ms, 24ms에 도착했다면, 새로운 RTT 추정치는? (α = 0.9 사용)
+- The formula for estimate new RTT : ```newRTT=αRTT+(1−α)arrivalRTT```
+```text
+newRTT1 = 0.9 * (30 ms) + 0.1 * (26 ms) = 29.6 ms
+newRTT2 = 0.9 * (29.6 ms) + 0.1 * (32 ms) = 29.84 ms
+newRTT3 = 0.9 * (29.84 ms) + 0.1 * (24 ms) = 29.256 ms
+```
+- 주어진 RTT 예측 공식은, 
+```newRTT=α * (oldRTT) + (1−α)arrivalRTT```
+한 번의 ACK 도착 시간을 기준으로, 새로운 RTT를 순차적으로 update 하는 방식
+- RTT는 계속 갱신해 나가는 동적인 값. ACK마다 한 번씩 계산이 반복 됨
