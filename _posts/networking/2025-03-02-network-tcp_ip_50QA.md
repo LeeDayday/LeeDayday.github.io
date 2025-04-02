@@ -436,3 +436,31 @@ newRTT3 = 0.9 * (29.84 ms) + 0.1 * (24 ms) = 29.256 ms
 ```newRTT=α * (oldRTT) + (1−α)arrivalRTT```
 한 번의 ACK 도착 시간을 기준으로, 새로운 RTT를 순차적으로 update 하는 방식
 - RTT는 계속 갱신해 나가는 동적인 값. ACK마다 한 번씩 계산이 반복 됨
+
+
+### 23. TCP의 주요 특징
+- Connection-oriented (연결 지향)
+	- destination과 connection(연결)을 설정한 후, data 전송
+- Stream Data Transfer (스트림 기반 데이터 전송)
+	- Byte Stream을 Packet(TCP Segment) 로 나누어 IP 계층에 전달
+- Reliable (신뢰성 보장)
+	- data 손상/중복/손실 된 경우, 복구
+- Point to Point
+	- End-to-End data 전달을 보장
+		- 송신자 - 수신자 사이 신뢰성 있는 data 전달 보장
+		- UDP는 End-to-End 보장 X (Best-effort delivery)
+- Interoperability (상호운용성)
+	- 플랫폼 간 호환성 문제를 제거하여 다양한 system 간 통신 가능
+		- OS, Hardware, Programming Language 관계 없이 통신 가능
+		- 표준화된 protocol 이기 때문에 가능
+		- UDP도 기본적인 상호운용성은 있으나, TCP만큼 엄격한 순서 보장, 흐름 제어, 에러 복구 등을 제공하지 않기 떄문에 복잡한 상호운용성 요구 상황에는 TCP 가 더 적합
+- Error and Flow Control
+	- 오류 검사, 흐름 제어, ACK 기능 제공
+- Name Resolution (이름 해석)
+	- Domain > IP address 변환하는데 도움을 줌
+	- TCP가 직접 처리하는 기능은 아니지만, TCP 통신을 시작하기 전에 필요한 단계이기 때문에 TCP 특징 목록에도 포함되는 경우가 있음
+- Routability
+	- TCP/IP는 routing이 가능한 protocol
+	- IP를 기준으로 경로를 결정할 수 있음
+- Full Duplex
+	- 양방향으로 동시에 data를 전송하고 수신할 수 있는 기능 제공
