@@ -464,3 +464,12 @@ newRTT3 = 0.9 * (29.84 ms) + 0.1 * (24 ms) = 29.256 ms
 	- IP를 기준으로 경로를 결정할 수 있음
 - Full Duplex
 	- 양방향으로 동시에 data를 전송하고 수신할 수 있는 기능 제공
+
+### 24. SCTP Protocol 이란?
+- Stream Control Transmission Protocl (스트림 제어 전송 프로토콜)
+- Connection-oriented 방식 (연결 지향)
+	- Endpoint 연결이 설정되면, 동시에 여러 개의 data stream을 전송할 수 있는 full-duplex 통신 제공
+	- Next-generation TCP
+- 인터넷 상 전화 통화 지원하기에 용이하도록 설계됨
+- 무선 네트워크에서의 연결 설정이나 멀티미디어 데이터 전송관리에도 적합하도록 설계
+- 일반적인 인터넷 통신에서는 여전히 TCP/UDP 가 주
