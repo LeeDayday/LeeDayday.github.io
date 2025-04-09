@@ -473,3 +473,32 @@ newRTT3 = 0.9 * (29.84 ms) + 0.1 * (24 ms) = 29.256 ms
 - 인터넷 상 전화 통화 지원하기에 용이하도록 설계됨
 - 무선 네트워크에서의 연결 설정이나 멀티미디어 데이터 전송관리에도 적합하도록 설계
 - 일반적인 인터넷 통신에서는 여전히 TCP/UDP 가 주
+
+### 25. Leaky Bucket 과 Token Bucket 의 차이 (Traffic Control Algorithms)
+- 공통점
+| Leaky / Token Bucket |
+| -- |
+| 혼잡 발생 전 예방 |
+| 주로 *송신자*에서 미리 조절 |
+| 전송량을 정해진 규칙에 따라 제한 |
+
+
+- Leaky Bucket
+	- 일정한 속도로만 data (packet) 을 전송
+	- 갑자기 traffic이 몰려도 내부 buffer(=Bucket =Queue)에 쌓아두고 똑같은 속도로 처리
+		- 너무 많이 몰리면 *buffer overflow*, **Packet Drop** 발생
+	- **물이 일정한 속도로 새는 구멍 난 양동이와 같은 개념**
+		- 많은 data가 들어와도 *내보내는 속도는 항상 일정*
+		- 단, data가 너무 많이 들어오면 양동이가 넘쳐서 data 손실됨 (Packet Drop)
+			- *Burst는 안 됨*
+	- 효과
+		- 네트워크 입장에선 항상 예측 가능한 traffic을 받을 수 있게 됨 
+		- 혼잡/traffic을 control 한다기보단 단순 shaping
+
+- Token Bucket
+	- 일정한 시간마다 *Token* 발급, Packet 전송할 때마다 Token 사용
+		- 별도의 요청이 없는 동안에는 token 축적...
+	- Token이 있으면 전송 가능, 없으면 대기
+	- 토큰이 여러 개 쌓이면 Burst(한꺼번에 여러 개 전송) 가능
+		- Token은 일정한 비율로만 생성되므로, 장기적으로는 평균 속도 제한 존재
+	- API 요청 제한, DDoS 방어, ... 유연한 rate control
