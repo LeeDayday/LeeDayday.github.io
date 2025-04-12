@@ -502,3 +502,24 @@ newRTT3 = 0.9 * (29.84 ms) + 0.1 * (24 ms) = 29.256 ms
 	- 토큰이 여러 개 쌓이면 Burst(한꺼번에 여러 개 전송) 가능
 		- Token은 일정한 비율로만 생성되므로, 장기적으로는 평균 속도 제한 존재
 	- API 요청 제한, DDoS 방어, ... 유연한 rate control
+
+### 26. 3-Way Handshaking Protocol
+
+```markdown
+### 1단계 (SYN)
+- ```Client ➡️ Server```
+- Client가 Server와 연결을 시작하고자 할 때 SYN (Synchronize Sequence Number) Flag가 설정된 Segment를 보냄
+	- 해당 segment는 통신을 시작하려는 의사와 함께 처음으로 사용할 Sequence Number를 서버에게 알림
+
+### 2단계 (SYN + ACK)
+- ```Client ⬅️ Server```
+- Server는 Client의 요청에 응답하여 SYN과 ACK flag가 설정된 Segment를 보냄
+	- SYN: Server도 통신을 시작할 준비가 되었다 & 자신이 사용할 Sequence Number를 Client에게 전달
+	- ACK: Client가 보낸 Segment 잘 받았음
+
+### 3단계 (ACK)
+- ```Client ➡️ Server```
+- Server가 보낸 Segment 잘 받았음
+- Client와 Server간 신뢰할 수 있는 연결 성립
+- 이제 실제 data 전송 시작 가능
+```
