@@ -523,3 +523,14 @@ newRTT3 = 0.9 * (29.84 ms) + 0.1 * (24 ms) = 29.256 ms
 - Client와 Server간 신뢰할 수 있는 연결 성립
 - 이제 실제 data 전송 시작 가능
 ```
+
+### 27. Connection-Oriented Service 와 Connection-less Service 비교
+| Connection-Oriented Service | Connection-less Service | 설명 |
+| -- | -- | -- |
+| 전화 시스템과 유사 | 우편 시스템과 유사 | 연결 후 통신하는 전화 ↔️ 주소만 쓰고 보내는 우편 |
+| 오래 지속되고 안정적인 통신에 적합 | 갑작스럽고 짧은 통신에 적합 | Streaming ↔️ 간헐적 요청 (예: DNS) |
+| 통신 전, 연결 설정이 필요 | 연결 설정 필요 없음 | TCP: 연결 필요 ↔️ UDP: 연결 X |
+| 혼잡 발생 가능성 낮음 | 혼잡 발생 가능성 있음 | TCP: 흐름/혼잡 제어 포함 ↔️ UDP: X |
+| 신뢰성 보장 | 신뢰성 보장 X | TCP: 손실 시 재전송 보장 ↔️ UDP: X |
+| 모든 Packet이 동일 경로를 따름 | Packet 마다 경로가 다를 수 있음 | TCP: 순서 보장 ↔️ UDP: 순서 불일치 가능 |
+| 높은 대역폭 요구 | 낮은 대역폭으로도 충분 | TCP: 추가 제어 정보 많음 ↔️ UDP: 간단 |
