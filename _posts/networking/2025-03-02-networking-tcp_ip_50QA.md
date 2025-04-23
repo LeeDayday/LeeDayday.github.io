@@ -534,3 +534,15 @@ newRTT3 = 0.9 * (29.84 ms) + 0.1 * (24 ms) = 29.256 ms
 | 신뢰성 보장 | 신뢰성 보장 X | TCP: 손실 시 재전송 보장 ↔️ UDP: X |
 | 모든 Packet이 동일 경로를 따름 | Packet 마다 경로가 다를 수 있음 | TCP: 순서 보장 ↔️ UDP: 순서 불일치 가능 |
 | 높은 대역폭 요구 | 낮은 대역폭으로도 충분 | TCP: 추가 제어 정보 많음 ↔️ UDP: 간단 |
+
+### 28. TCP 연결의 단계는 무엇인가?
+- TCP에서 Connection-Oriented Transmission (연결 지향 전송)은 3 단계를 거침
+1. 연결 설정 (Connection Establishment)
+2. 데이터 전송 (Data Transfer)
+3. 연결 종료 (Connection Termination)
+
+### 29. TCP Sliding window의 기능은?
+- variable-size window (가변 크기 윈도우) 를 활용하여 Flow control (흐름 제어) 와 Reliable Transfer (신뢰성 있는 데이터 전송) 모두 제공
+- full-duplex, 각 연결에서는 양방향으로 동시에 데이터 전송 가능
+- 서로 속도나 처리 능력이 다른 장치들 간 원할한 통신 지원
+
