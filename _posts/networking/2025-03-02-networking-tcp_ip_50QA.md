@@ -525,6 +525,7 @@ newRTT3 = 0.9 * (29.84 ms) + 0.1 * (24 ms) = 29.256 ms
 ```
 
 ### 27. Connection-Oriented Service 와 Connection-less Service 비교
+
 | Connection-Oriented Service | Connection-less Service | 설명 |
 | -- | -- | -- |
 | 전화 시스템과 유사 | 우편 시스템과 유사 | 연결 후 통신하는 전화 ↔️ 주소만 쓰고 보내는 우편 |
@@ -546,3 +547,36 @@ newRTT3 = 0.9 * (29.84 ms) + 0.1 * (24 ms) = 29.256 ms
 - full-duplex, 각 연결에서는 양방향으로 동시에 데이터 전송 가능
 - 서로 속도나 처리 능력이 다른 장치들 간 원할한 통신 지원
 
+### 30. TCP Header의 최대/최소 크기
+- **20 bytes ~ 60 bytes**
+- 최소한의 정보 (Header 필수 요소)
+
+	| 항목 | bit | bytes |
+	| -- | -- | -- |
+	| Source Port Number | 16 | 2 |
+	| Destination Port Number | 16 | 2 |
+	| Sequence Number | 32 | 4 |
+	| Acknowledgment Number | 32 | 4 |
+	| Data offset, Reserved, Flags | 16 | 2 |
+	| Window Size | 16 | 2 |
+	| Check sum | 16 | 2 |
+	| Urgent | 16 | 2 |
+	| Total | 160 | 20 |
+
+- 추가 옵션 필드
+
+	| 항목 | bytes |
+	| -- | -- | 
+	| Option  + Padding | 최대 40 bytes |
+
+### 31. Port Number 는 고유해야 할까? Port Number 는 왜 IP Address 보다 짧을까?
+- `TCP Header 내 Port Number: 16 bit < IPv4: 32 bit`
+- Port Number는 통신하는 protocol을 구분하기 위한 것
+	- client와 server가 통신할 때 어떤 service (process) 에 연결할지 지정
+- 통신 protocol 종류 (Port Number 수) 가 컴퓨터 시스템 수 (IP Address) 보다 훨씬 적기 때문에 더 짧음
+- 추가 질문: 임의의 포트(Ephemeral Port) 도 고유할까?
+	- TCP 통신 과정을 보면 sender가 초기 요청을 보낼 때 OS가 자신의 Port Number를 임의로 배정해줌
+		- OS는 현재 system 내에서 사용 중이지 않은 Port Number 중 하나를 임의로 선택해서 할당
+			- 이 선택 또한 해당 system 내에서 일시적으로 고유한 값
+- 결론:
+	- **Port Number가 고유하다** = `해당 연결, 해당 시간, 해당 시스템에서 식별자로서 충돌이 없도록 관리된다`

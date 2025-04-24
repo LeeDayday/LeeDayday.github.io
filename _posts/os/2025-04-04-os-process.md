@@ -102,5 +102,17 @@ last_modified_at: 2025-04-11
 ### Thread와의 비교
 #### Thread
 - Process 내에서 실행되는 작업 단위
+- 여러 Thread는 하나의 Process가 할당 받은 자원(code, data, heap) 을 공유
+- 각 Thread는 독립적인 stack, program counter, register 집합을 가짐
+   - 같은 자원을 공유하므로 통신 비용이 낮고, 작업 분할이 빠름
 
 ### Multiprocessing 과 Multithreading
+
+| 항목 | Multiprocessing | Multithreading |
+| -- | -- | -- |
+| 실행 단위 | 여러 개의 독립된 process 실행 | 하나의 process 내 여러 thread 실행 |
+| 메모리 공간 | process마다 독립된 memory 공간 사용 | memory 공간 공유 (stack 만 분리) |
+| 안정성 | 하나가 죽어도 다른 process는 영향 x | 하나의 thread가 죽으면 전체 process에 영향 o |
+| 자원 소비 | 상대적으로 무겁고 resource 소모 큼 | 가볍고 빠름. context switching 비용 작음 |
+| 통신 방식 | IPC(Inter-Process Communication) 필요 | 공유 메모리를 통한 간단한 통신 가능 |
+
