@@ -600,3 +600,12 @@ newRTT3 = 0.9 * (29.84 ms) + 0.1 * (24 ms) = 29.256 ms
 	- TCP와 달리 사전에 연결 과정(3-Way Handshake) 없음
 	- 신뢰성 x
 	- 무결성 x
+
+### 34. Registered Port 와 Dynamic Port란?
+
+| Port 종류 | 범위 | 관리 주체 | 특징 |
+| -- | -- | -- | -- |
+| Well-Knwon | 0 ~ 1023 | IANA 가 할당, 제어, 등록 모두 관리 | HTTP(80), HTTPS(443), ... 등과 같이 널리 알려진 서비스가 사용 |
+| Registered | 1024 ~ 49151 | IANA가 등록만 관리 | 중복 방지를 위한 등록 |
+| Dynamic (Private/Ephemeral) | 49152 ~ 65535 | 완전 자유 사용 | OS 나 Application이 임시 Port로 자동 할당. 등록, 제어 X | 
+
