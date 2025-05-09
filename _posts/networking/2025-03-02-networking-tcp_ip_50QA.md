@@ -609,3 +609,9 @@ newRTT3 = 0.9 * (29.84 ms) + 0.1 * (24 ms) = 29.256 ms
 | Registered | 1024 ~ 49151 | IANA가 등록만 관리 | 중복 방지를 위한 등록 |
 | Dynamic (Private/Ephemeral) | 49152 ~ 65535 | 완전 자유 사용 | OS 나 Application이 임시 Port로 자동 할당. 등록, 제어 X | 
 
+### 35. TTL (Time To Live) 필드의 중요성은?
+- 전송되는 data의 수명/유효 시간을 의미
+	- 해당 시간이 지나면 데이터는 폐기됨 (TTL = 0 이면 폐기)
+- Packet이 Network 상에서 **허용된 최대 Hop 수**를 나타낸다고도 볼 수 있음
+- **전송 불가능한 Datagram이 Network 상에서 무한히 순환하는 상황을 방지**
+
