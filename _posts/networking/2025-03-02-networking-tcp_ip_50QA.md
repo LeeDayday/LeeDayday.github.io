@@ -615,3 +615,41 @@ newRTT3 = 0.9 * (29.84 ms) + 0.1 * (24 ms) = 29.256 ms
 - Packet이 Network 상에서 **허용된 최대 Hop 수**를 나타낸다고도 볼 수 있음
 - **전송 불가능한 Datagram이 Network 상에서 무한히 순환하는 상황을 방지**
 
+### 36. IPv4 패킷이 도착했는데, 처음 8비트가 `01000010`이다. 수신자는 이 패킷을 폐기한다. 그 이유는?
+- 처음 4비트: IP version
+	- `0100`: IPv4
+	- `0110`: IPv6
+- 다음 4 비트: 헤더 길이 (단위: 4 bytes) (IPv4만 헤더 길이를 비트로 명시)
+	- IPv4의 최소 헤더 길이: 20 bytes
+	- `0010` 은 헤더 길이가 2 * 4 bytes = 8 bytes 임을 의미함
+	- 최소 길이를 만족하지 않으므로, 수신자는 해당 패킷을 유효하지 않다고 판단하고 폐기함
+
+### 37. IPV4 패킷에서 HLEN 값이 2진수로 `1000` 이다. 몇 bytes의 옵션이 포함되어 있나?
+- HLEN: 전체 헤더 길이 (필수 필드 (20 bytes) + 옵션 필드), 최대 60 bytes
+- HLEN: `1000` 이라면 전체 헤더 길이: 4 bytes * 8 = 32 bytes
+	- 옵션 필드: 32 bytes (전체 헤더 길이) - 20 bytes (필수 필드) = 12 bytes
+
+### 38. Open-loop 혼잡 제어, Closed-loop 혼잡 제어 기술은 무엇인가?
+- Open-loop 혼잡 제어
+	- 혼잡을 예방하기 위한 제어 정책 (사전에 설계된 정책)
+	- source, destination 양측에서 제어됨
+		- 예: Packet 간 생성 간격 유지, 데이터 흐름 제어, 정적 라우팅 등
+- Closed-loop 혼잡 제어
+	- 혼잡이 발생한 이후에 이를 감지하고 제어하는 방식
+	- 예: TCP 혼잡 제어 알고리즘, ICMP 메시지를 통한 알림 등
+
+### 39. IPv4 Header 에서 Router를 통과할 때마다 변경되는 필드는?
+- Header Checksum
+	- 역할: IPv4 Header의 오류 검출용 값
+	- 변경되는 이유
+		- Router 는 IP Header의 일부 필드 (예: TTL) 등을 직접 수정하기 때문에, Header 전체의 Checksum도 다시 계산해야 함
+	- Router 를 거칠 때마다 반드시 변경됨
+- TTL 
+	- 역할: Packet에 수명을 할당하여 루프 방지
+	- 변경되는 이유
+		- Router를 지날 때마다 1씩 감소
+- Total Length
+	- 역할: IP Header + data 전체 길이
+	- 변경되는 이유
+		- packet fragmentation이 일어날 경우, router가 수정할 수 있음
+	- 반드시 바뀌는 것은 아님
