@@ -653,3 +653,26 @@ newRTT3 = 0.9 * (29.84 ms) + 0.1 * (24 ms) = 29.256 ms
 	- 변경되는 이유
 		- packet fragmentation이 일어날 경우, router가 수정할 수 있음
 	- 반드시 바뀌는 것은 아님
+
+### 40. 방화벽이란?
+- 컴퓨터나 네트워크로 들어오거나 나가는 data를 제어하는 보안 시스템
+- 일종의 '벽'처럼 작동
+	- 미리 정의된 규칙을 충족하지 않는 위험한 traffic 차단
+	- 안전한 데이터만 통과하도록 허용
+
+### 41. NAT (Network Address Translation) 의 개념 설명
+- NAT는 Router가 Private Network와 Internet 사이를 오가는 data의 IP Address를 변환하는 과정
+- 기기가 data를 전송하면, Router는 해당 기기의 Private IP Address 를 Public IP Address로 변경
+- data가 다시 돌아오면, Router는 이를 올바른 기기로 다시 전달
+	- 하나의 Public IP 로 여러 Private IP의 인터넷 접근을 가능하게 해주는 기술
+	- Private Network -> Public Network 간 주소 변환
+
+### 42. 한 호스트가 다른 호스트에게 100개의 datagram을 전송한다. 만약 첫 번째 diagram의 identification number이 1024라면, 마지막 datagram의 identification number은? (IPv4 에서) 
+- IPv4의 Identification field는 각 datagram (packet)을 구분하기 위해 사용
+- 각 datagram 마다 id 가 1씩 증가
+- datagram의 id는 fragmentation 시에도 사용됨. 따라서 같은 datagram 조각 구별 가능
+- 1024 + 99 = 1123
+
+### 43. IPv6 Header 에 Checksum이 없는 이유는?
+- checksum 기능이 상위 계층 protocol에서 제공됨
+- IP 계층에서 필요하지 않기 때문에 제거됨 (중복 및 성능 저하 우려)
