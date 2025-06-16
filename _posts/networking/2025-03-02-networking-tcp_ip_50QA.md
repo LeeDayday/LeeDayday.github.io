@@ -6,7 +6,7 @@ categories:
 tags: [networking, tcp/ip, interviews, cs]
 
 date: 2025-03-02
-last_modified_at: 2025-03-19
+last_modified_at: 2025-06-16
 ---
 
 [TCP / IP - 50 Interview Questions]
@@ -676,3 +676,55 @@ newRTT3 = 0.9 * (29.84 ms) + 0.1 * (24 ms) = 29.256 ms
 ### 43. IPv6 Header 에 Checksum이 없는 이유는?
 - checksum 기능이 상위 계층 protocol에서 제공됨
 - IP 계층에서 필요하지 않기 때문에 제거됨 (중복 및 성능 저하 우려)
+
+### 44. IPv4 에서 IPv6으로 전환할 때 사용되는 3가지 전략
+- Dual-stack (이중 스택)
+	- 하나의 장비 (예: Router, Server) 가 IPv4와 IPv6 프로토콜을 동시에 지원하여 두 가지 네트워크와 통신할 수 있도록 지원
+- Tunneling (터널링)
+	- IPv6 packet을 IPv4 packet 안에 캡슐화해서 IPv4 network를 통해 전달
+	- IPv4 networkf를 tunnel처럼 사용해 IPv6 데이터를 전송
+- Header Translation (헤더 변환)
+	- IPv4, IPv6 header를 서로 변환하여 양쪽 protocol 간의 호환성 확보
+	- 주로 NAT64, SIIT 같은 기술이 포함됨
+
+### 45. Tunneling이란?
+- 같은 유형의 source network와 destination network를, 다른 유형의 network를 통해 연결해야할 때 사용되는 Internetworking 기술
+- IPv6 간 통신을 위해 IPv4 network를 'tunnel' 처럼 통과
+
+### 46. ARP protocol 의 목적은?
+- ARP: Address Resolution Protocol
+	- IP 주소만 알고 있을 때 해당 장치의 물리적 주소(MAC Address) 를 알아내기 위해 사용
+- 동일 network 내 (local network) data를 보내고자 할 때, ARP 는 destination 장치의 IP Address를 MAC Address 로 변환
+- MAC Address 는 Ethernet Frame을 해당 장치에 직접 전송하는데 사용됨
+- **같은 network 내에서 장치 간 data 전송을 위해 반드시 필요한 절차**
+
+### 47. Fragmentation 이란?
+- Network Layer에서 수행되는 기능
+- Gateway 가 큰 packet을 더 작은 단위인 fragment로 나누는 기술
+	- 각 fragment는 독립된 내부 packet으로 전송되며, 각각의 packet은 자체적인 header 와 trailer를 가지고 있음
+- 하나의 datagram은 최종 destination에 도달하기 전까지 여러 번 fragmentation 이 수행될 수 있음
+- fragment들을 다시 재조립(reassembly) 하는 것은 어려운 작업
+	- fragment들이 독립적인 datagram으로 취급됨
+	- reassembly는 최종 destination에 도달한 host가 담당
+
+### 48. 10Mbps Ethernet에서 48-bit Jamming Signal을 사용할 떄, Round Trip Propagation Delay 시간이 46.4ms일 때, frame의 최소 크기는?
+- frame은 전파 지연보다 충분히 길어야 충돌을 감지할 수 있음 (최소 frame 크기가 필요한 이유)
+- 전송 속도: 10Mbps
+- Round Trip Propagation Delay (왕복 전파 지연 시간): 46.6ms
+- 최소 프레임의 크기 = 전파 지연 시간 x 전송 속도
+	= 46.4 x 10^-3 x 10 x 10 Mbps = 46.4 x 10^4 bit = 464 Kbit
+
+
+### 49. TCP Congestion Control 의 slow start 단계에서 Congestion Window (cwnd) 의 크기는 어떻게 되는가?
+- TCP는 network에 너무 많은 packet을 한꺼번에 보내 Congestion을 일으키지 않기 위해 Congestion Control을 수행
+- 초기에는 network의 용량을 모르기 때문에 점진적으로 알아가는 방식이 필요
+- Slow 단계에서는 Congestion Window의 크기가 지수적으로 증가
+- 일정 threshold에 도달하면 Congestion Avoidance 단계로 넘어가며 선형 증가로 바뀜
+
+
+### 50. n-bit Frame Sequence Number를 사용하는 Selective Reject Protocol의 최대 Window 크기는?
+- Selective Reject는 신뢰성 있는 data 전송을 위한 ARQ(Automatic Repeat reQuest) 방식 중 하나
+- 송신자는 여러 frame을 보낼 수 있고, 수신자는 오류난 frame만 재전송 요청
+- n-bit frame sequence Number => 사용가능한 번호는 총 2^n 개
+- Selective Reject는 수신 측에서 중복되는 번호 구분이 어려워서, 2^(n-1)을 넘을 수 없음
+- 2^(n - 1)
