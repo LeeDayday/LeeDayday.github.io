@@ -34,10 +34,31 @@ last_modified_at: 2025-06-18
 ## OSI 7계층 구조
 
 ### 계층 목록
+- 각 계층은 하위 계층에 의존하면서 상위 계층에 서비스를 제공하는 구조
+- 위 > 아래: Data 전송 과정
+
+| 계층 번호 | 계층 이름 | 주요 역할 | 예시 Protocol 및 장비 |
+| -- | -- | -- | -- |
+| 7 | Application (응용) | 사용자에게 네트워크 기능 제공 | HTTP, FTP, SMTP, DNS |
+| 6 | Presentation (표현) | 데이터 형식, encoding/decoding, 암호화 | SSL/TLS, JPEG, MPEG |
+| 5 | Session (세션) | 연결(session) 설정, 유지, 종료 | NetBIOS, RPC |
+| 4 | Transport (전송) | 신뢰성 보장, port number, 흐름 제어 | TCP, UDP |
+| 3 | Network (네트워크) | IP 주소 지정, routing | IP, ICMP, Router |
+| 2 | Data Link (데이터 링크) | MAC 주소 기반 통신, 오류 검출 | Ethernet, ARP, Switch |
+| 1 | Physical (물리 계층) | 비트 전송, 전기적 신호, 케이블 | UTP, 광케이블, 허브 |
 
 ### 위 > 아래 방향성과 통신 흐름
+- Source 측 (Application Layer -> Physical Layer 순으로)
+- 각 계층은 상위 계층의 data를 받아 **header 를 붙여 캡슐화**
 
-## 각 계층별 기능 및 예시
+1. 사용자가 웹페이지 요청 (7)
+2. data 형식 맞춤, 암호화 등 처리 (6)
+3. 세션 생성 (5)
+4. TCP/UDP 로 신뢰성 보장 (4)
+5. IP Address 붙여 경로 결정 (3)
+6. MAC 주소 붙이고 frame 화 (2)
+7. 전기 신호로 전송 (1)
+
 
 ## OSI 모델을 왜 배우는가?
 
