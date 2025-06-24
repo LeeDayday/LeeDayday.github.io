@@ -63,14 +63,48 @@ last_modified_at: 2025-06-18
 ## OSI 모델을 왜 배우는가?
 
 ### Debugging, Network 설계 시 이점
+- OSI model은 복잡한 network 문제를 체계적으로 분석할 수 있게 해줌
+  - 계층별로 역할이 분리 ➡️ 문제 발생 시, 어느 계층에서의 문제인지 구분하기 쉬움
 
 ### 문제 원인 계층별 추적
+- 문제 상황 예시: `웹페이지가 안 떠요!`
+- OSI 계층에 따라 분석해보기
+  - 계층 별로 문제를 나누어 debugging 범위를 좁힐 수 있음
+
+| 계층 | checkpoint |
+| -- | -- |
+| 1 계층 | 케이블이 제대로 꽂혔는가? 와이파이 연결은 되었는가? |
+| 2 계층 | Switch에서 MAC Address 충돌은 없는가? |
+| 3 계층 | IP Address 는 설정되었는가? Gateway는 정상인가? |
+| 4 계층 | TCP 연결이 이루어졌는가? Port가 열려있는가? |
+| 7 계층 | Web Server가 실행중인가? URL이 올바른가? |
 
 ### 보안/성능/분산 시스템 설계에서의 활용
+- 보안에서의 활용
+  - 계층마다 보안 이슈가 다름
+    - 2 계층: ARP Spoofing
+    - 3 계층: IP Spoofing
+    - 4 계층: Port Scanning
+    - 7 계층: SQL Injection, XSS
+- 성능 최적화
+  - 4 계층(TCP 조정), 3 계층(Routing), 2 계층(MAC Cache 조정) 등 각 계층 단위로 튜닝 가능
+- 분산 시스템 설계
+  - 데이터 전송 경로, 보안 계층, 포맷 처리 등 계층 단위로 분리해 설계 가능
 
 ## OSI 모델과 TCP/IP 모델 비교
 
 ### 계층 통합 여부
 
-### 실제 network에선 TCP/IP 모델이 쓰이지만 OSI 모델로 설명하는 이유
+| 항목 | OSI model (7 layers) | TCP/IP model (4 layers) |
+| -- | -- | -- |
+| Application | Application (7) + Presentation (6) + Session (5) | Application Layer |
+| Transport |  Transport (4) | Transport Layer |
+| Network | Network (3) | Network Layer |
+| Link | DataLink (2) + Physical (1) | Network Access Layer |
 
+### 실제 network에선 TCP/IP 모델이 쓰이지만 OSI 모델로 설명하는 이유
+- 실제 인터넷 통신은 TCP/IP 구조를 따름
+- TCP/IP는 계층 간 구분이 애매한 겨웅가 많아, 문제 분석이나 설계 논의 시 OSI model 로 설명하는 것이 더 명확
+- 예시
+  - WireShark에서도 OSI model 기준으로 Protocol qnstjr
+  - L2 Switch, L3 Router, L7 Load Balancer 등 모두 OSI 기준으로 설명
